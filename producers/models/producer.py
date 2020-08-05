@@ -45,8 +45,6 @@ class Producer:
 
         self.producer = AvroProducer(self.broker_properties)
 
-        self.close()
-
     def create_topic(self):
         """Creates the producer topic if it does not already exist"""
         if not self.topic_exists():
@@ -73,15 +71,13 @@ class Producer:
                     raise
 
     def topic_exists(self):
-        topic_metadata = self.admin_client.list_topics(timeout=5)
-        return topic_metadata.topics.get(self.topic_name) is not None
-
-    def time_millis(self):
-        return int(round(time.time() * 1000))
+        metadata = self.admin_client.list_topics(timeout=5)
+        return metadata.topics.get(self.topic_name) is not None
 
     def close(self):
         """Prepares the producer for exit by cleaning up the producer"""
-        self.producer.flush(1000)
+        # TODO - make sure this is all we need to ensure it is closed correctly
+        self.producer.flush(10000)
 
     def time_millis(self):
         """Use this function to get the key for Kafka Events"""
