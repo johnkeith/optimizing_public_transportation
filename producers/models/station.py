@@ -25,9 +25,10 @@ class Station(Producer):
             .replace("'", "")
         )
 
-        topic_name = f"stations.{station_name}"
+        self.topic_name = f"stations.{station_name}"
+
         super().__init__(
-            topic_name,
+            self.topic_name,
             key_schema=Station.key_schema,
             value_schema=Station.value_schema,
             num_partitions=5,
@@ -54,11 +55,11 @@ class Station(Producer):
                "station_id": self.station_id,
                "train_id": train.train_id,
                "direction": direction,
-               "line": "TODO", # not sure how to get this
+               "line": self.color.name,
                "train_status": train.status.name,
                "prev_station_id": prev_station_id,
                "prev_direction": prev_direction
-           },
+           }
         )
 
     def __str__(self):
