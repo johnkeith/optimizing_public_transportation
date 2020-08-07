@@ -9,6 +9,8 @@ verify_ssl = true
 confluent-kafka = { extras = ["avro"] }
 pandas = "*"
 requests = "*"
+faust = "*"
+tornado = "*"
 
 [requires]
 python_version = "3.8"

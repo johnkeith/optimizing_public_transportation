@@ -28,7 +28,7 @@ class Weather(Producer):
     summer_months = set((6, 7, 8))
 
     def __init__(self, month):
-        self.topic_name = "weather.reports"
+        self.topic_name = "cta.weather.reports"
 
         super().__init__(
             self.topic_name,

@@ -26,7 +26,7 @@ class Turnstile(Producer):
             .replace("'", "")
         )
 
-        self.topic_name = f"turnstiles.{station_name}"
+        self.topic_name = "cta.turnstiles.entries"
 
         super().__init__(
             self.topic_name,

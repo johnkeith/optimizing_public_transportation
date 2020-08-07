@@ -25,7 +25,7 @@ class Station(Producer):
             .replace("'", "")
         )
 
-        self.topic_name = f"stations.{station_name}"
+        self.topic_name = "cta.stations.arrivals"
 
         super().__init__(
             self.topic_name,

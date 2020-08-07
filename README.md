@@ -50,6 +50,8 @@ To accomplish this, you must complete the following tasks:
 	* The station emits a `turnstile` event to Kafka whenever the `Turnstile.run()` function is called.
 	* Ensure that events emitted to kafka are paired with the Avro `key` and `value` schemas
 
+	- DONE
+
 ### Step 2: Configure Kafka REST Proxy Producer
 Our partners at the CTA have asked that we also send weather readings into Kafka from their weather hardware. Unfortunately, this hardware is old and we cannot use the Python Client Library due to hardware restrictions. Instead, we are going to use HTTP REST to send the data to Kafka from the hardware using Kafka's REST Proxy.
 
@@ -64,6 +66,8 @@ To accomplish this, you must complete the following tasks:
 		* **NOTE**: When sending HTTP requests to Kafka REST Proxy, be careful to include the correct `Content-Type`. Pay close attention to the [examples in the documentation](https://docs.confluent.io/current/kafka-rest/api.html#post--topics-(string-topic_name)) for more information.
 	* Ensure that events emitted to REST Proxy are paired with the Avro `key` and `value` schemas
 
+	- DONE
+
 ### Step 3: Configure Kafka Connect
 Finally, we need to extract station information from our PostgreSQL database into Kafka. We've decided to use the [Kafka JDBC Source Connector](https://docs.confluent.io/current/connect/kafka-connect-jdbc/source-connector/index.html).
 
@@ -74,6 +78,8 @@ To accomplish this, you must complete the following tasks:
 	* You can run this file directly to test your connector, rather than running the entire simulation.
 	* Make sure to use the [Landoop Kafka Connect UI](http://localhost:8084) and [Landoop Kafka Topics UI](http://localhost:8085) to check the status and output of the Connector.
 	* To delete a misconfigured connector: `CURL -X DELETE localhost:8083/connectors/stations`
+
+	- DONE
 
 ### Step 4: Configure the Faust Stream Processor
 We will leverage Faust Stream Processing to transform the raw Stations table that we ingested from Kafka Connect. The raw format from the database has more data than we need, and the line color information is not conveniently configured. To remediate this, we're going to ingest data from our Kafka Connect topic, and transform the data.
