@@ -138,3 +138,15 @@ services:
     volumes:
     - ./producers/data/cta_stations.csv:/tmp/cta_stations.csv
     - ./load_stations.sql:/docker-entrypoint-initdb.d/load_stations.sql
+
+  kowl:
+    image: quay.io/cloudhut/kowl:v1.1.0
+    restart: on-failure
+    hostname: kowl
+    volumes:
+    - ./config.yaml:/etc/kowl/config.yaml
+    ports:
+    - "8080:8080"
+    entrypoint: ./kowl --config.filepath=/etc/kowl/config.yaml
+    depends_on:
+      - kafka0

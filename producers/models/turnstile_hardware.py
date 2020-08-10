@@ -63,4 +63,6 @@ class TurnstileHardware:
         # Calculate approximation of number of entries for this simulation step
         num_entries = int(math.floor(num_riders * ratio / total_steps))
         # Introduce some randomness in the data
-        return max(num_entries + random.choice(range(-5, 5)), 0)
+        result = max(num_entries + random.choice(range(-5, 5)), 1)
+
+        return result

@@ -27,14 +27,14 @@ class TransformedStation(faust.Record):
     line: str
 
 
-app = faust.App("stations-stream", broker="kafka://localhost:9092", store="memory://")
+app = faust.App("stations-stream", broker="KAFKA://localhost:9092", store="memory://")
 topic = app.topic("postgres-connect-stations", value_type=Station)
-out_topic = app.topic("cta.stations", partitions=1)
+out_topic = app.topic("cta.stations.table", partitions=1)
 
 table = app.Table(
-   "cta.stations.table",
+   "cta-stations-table",
    default=int,
-   partitions=5,
+   partitions=1,
    changelog_topic=out_topic
 )
 

@@ -7,6 +7,7 @@ from confluent_kafka.avro import AvroProducer
 
 BROKER_URL = "PLAINTEXT://localhost:9092"
 SCHEMA_REGISTRY_URL = "http://localhost:8081"
+GROUP_ID = "CTA"
 
 logger = logging.getLogger(__name__)
 
@@ -33,6 +34,7 @@ class Producer:
 
         self.broker_properties = {
             "bootstrap.servers": BROKER_URL,
+            "group.id": GROUP_ID,
             "schema.registry.url": SCHEMA_REGISTRY_URL
         }
 

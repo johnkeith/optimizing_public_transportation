@@ -12,20 +12,24 @@ KSQL_URL = "http://localhost:8088"
 
 KSQL_STATEMENT = """
 CREATE TABLE turnstile (
+    timestamp INTEGER,
     station_id INTEGER,
+    station_name VARCHAR,
+    line VARCHAR,
     num_entries INTEGER
 ) WITH (
     KAFKA_TOPIC='cta.turnstiles.entries',
-    VALUE_FORMAT='AVRO',
-    KEY='station_id'
+    KEY='timestamp',
+    VALUE_FORMAT='AVRO'
 );
 
-CREATE TABLE turnstile_summary WITH (
+CREATE TABLE turnstile_summary
+WITH (
     VALUE_FORMAT='JSON'
 ) AS
-    SELECT station_id, count(num_entries) AS count
-    FROM turnstile
-    GROUP BY station_id;
+SELECT station_id, SUM(num_entries) AS COUNT
+FROM turnstile t
+GROUP BY t.station_id;
 """
 
 def execute_statement():

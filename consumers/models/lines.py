@@ -4,9 +4,7 @@ import logging
 
 from models import Line
 
-
 logger = logging.getLogger(__name__)
-
 
 class Lines:
     """Contains all train lines"""
@@ -19,9 +17,9 @@ class Lines:
 
     def process_message(self, message):
         """Processes a station message"""
-        if "org.chicago.cta.station" in message.topic():
+        if "cta.stations" in message.topic():
             value = message.value()
-            if message.topic() == "org.chicago.cta.stations.table.v1":
+            if message.topic() == "cta.stations.table":
                 value = json.loads(value)
             if value["line"] == "green":
                 self.green_line.process_message(message)

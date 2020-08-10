@@ -107,6 +107,7 @@ To accomplish this, you must complete the following tasks:
 * You can run this file on its own simply by running `python ksql.py`
 * Made a mistake in table creation? `DROP TABLE <your_table>`. If the CLI asks you to terminate a running query, you can `TERMINATE <query_name>`
 
+- DONE
 
 ### Step 6: Create Kafka Consumers
 With all of the data in Kafka, our final task is to consume the data in the web server that is going to serve the transit status pages to our commuters.
@@ -117,6 +118,8 @@ To accomplish this, you must complete the following tasks:
 1. Complete the code in `consumers/models/line.py`
 1. Complete the code in `consumers/models/weather.py`
 1. Complete the code in `consumers/models/station.py`
+
+- DONE
 
 ### Documentation
 In addition to the course content you have already reviewed, you may find the following examples and documentation helpful in completing this assignment:
